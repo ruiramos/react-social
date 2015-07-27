@@ -117,7 +117,7 @@
 
     , click: function (e) {
       this.props.onClick(e);
-      window.open(this.constructUrl(), "_blank");
+      window.open(this.constructUrl(), "_blank", this.props.windowFeatures);
     }
 
     , render: function () {
@@ -128,6 +128,7 @@
         , React.__spread({ "onClick": this.click }, other)
       );
     }
+
   };
 
   exports.FacebookCount = React.createClass({
