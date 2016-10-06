@@ -195,7 +195,8 @@
       , message: React.PropTypes.string
       , onClick: React.PropTypes.func
       , target: React.PropTypes.string
-      , _open: React.PropTypes.bool
+      , _open: React.PropTypes.bool,
+      , windowFeatures: React.PropTypes.string
     }
 
     , getDefaultProps: function () {
