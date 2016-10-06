@@ -24,7 +24,7 @@ class App extends Component {
     let url = "https://github.com";
 
     return (
-      <FacebookButton url={url}>
+      <FacebookButton url={url} appId={appId}>
         <FacebookCount url={url} />
         {" Share " + url}
       </FacebookButton>
@@ -117,9 +117,15 @@ Url of an image.
 
 ##### appId
 
-- FacebookButton
+- FacebookButton (required)
 
 Facebook app id.
+
+##### sharer
+
+- FacebookButton
+
+Facebook has 2 different share dialogs. By default we're showing Feed Dialog which has more options, but supports only sharing to user's feed. You can set `sharer` option to `true` and we'll show Share Dialog where user can choose between their feed and also pages they have access to.
 
 ## Styles
 
@@ -144,6 +150,9 @@ them yourself.
 * Maxime Mezrahi (@maxs15)
 * Arvin Tehrani (@arvinkx)
 * Dennis Stücken (@dstuecken)
+* Jonas (@jonashaefele)
+* River Kanies (@riverKanies)
+* Pavel Linkesch (@orthes)
 
 
 ---

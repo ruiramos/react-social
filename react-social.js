@@ -176,7 +176,7 @@
     , render: function () {
       return React.createElement(
         this.props.element
-        , spread(this.props, ["element", "url"])
+        , spread(this.props, ["element", "url", "onCount"])
         , this.state.count
       );
     }
@@ -186,7 +186,10 @@
     displayName: "Button"
 
     , propTypes: {
-      element: React.PropTypes.string
+      element: React.PropTypes.oneOfType([
+        React.PropTypes.string
+      , React.PropTypes.func
+      ])
       , url: React.PropTypes.string
       , media: React.PropTypes.string
       , message: React.PropTypes.string
@@ -222,7 +225,7 @@
     }
 
     , render: function () {
-      var other = spread(this.props, ["onClick", "element", "url"]);
+      var other = spread(this.props, ["onClick", "element", "url", "_open", "message", "appId", "media"]);
 
       return React.createElement(
         this.props.element
@@ -245,16 +248,16 @@
     , mixins: [Count]
 
     , constructUrl: function () {
-      var fql = encodeURIComponent("select like_count, share_count from link_stat where url = '" + this.props.url + "'")
-        , url = "https://api.facebook.com/method/fql.query?format=json&callback=@&query=" + fql;
-
+      var url = "https://graph.facebook.com/?callback=@&id=" + encodeURIComponent(this.props.url);
       return url;
     }
 
     , extractCount: function (data) {
-      if (!data[0]) { return 0; }
+      if (!data || !data.share || !data.share.share_count) {
+        return 0;
+      }
 
-      return data[0].like_count + data[0].share_count;
+      return data.share.share_count;
     }
   });
 
@@ -389,10 +392,14 @@
       appId: React.PropTypes.oneOfType([
         React.PropTypes.string,
         React.PropTypes.number
-      ])
+      ]).isRequired
     }
 
     , constructUrl: function () {
+      if (this.props.sharer) {
+        return "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(this.props.url)
+      }
+
       return "https://www.facebook.com/dialog/feed?"
              + "app_id=" + encodeURIComponent(this.props.appId)
              + "&display=popup&caption=" + encodeURIComponent(this.props.message)

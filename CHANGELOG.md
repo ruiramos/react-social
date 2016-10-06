@@ -1,3 +1,20 @@
+##### 1.6.0 (2016-09-22)
+
+* Fix `FacebookCount` with http://graph.facebook.com.
+
+##### 1.4.3 (2016-07-27)
+
+* Fix React warnings.
+* Make `appId` required by FacebookButton.
+
+##### 1.4.2 (2016-07-14)
+
+* Fix React warnings.
+
+##### 1.4.1 (2016-06-09)
+
+* Allow function as possible value to element prop.
+
 ##### 1.4.0 (2016-05-25)
 
 * Add PocketButton, PocketCount and TwitterCount.
